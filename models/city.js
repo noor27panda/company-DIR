@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       City.belongsTo(models.Province, {
         foreignKey: 'provinceId'
       })
+      City.hasMany(models.Company, {
+        foreignKey: "cityId",
+      });
     }
   }
   City.init({

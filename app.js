@@ -10,6 +10,7 @@ var adminsRouter = require('./routes/admins');
 var companiesRouter = require('./routes/companies');
 var provincesRouter = require('./routes/provinces');
 var citiesRouter = require('./routes/cities');
+var categoriesRouter = require('./routes/categories');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/admins', adminsRouter);
 app.use('/companies', companiesRouter);
 app.use('/provinces', provincesRouter);
 app.use('/cities', citiesRouter);
+app.use('/categories', categoriesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

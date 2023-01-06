@@ -5,6 +5,11 @@ const userTransformer = (user) => {
     return user
 }
 
+const usersTransformer = (users) => {
+    return users.map((user) => userTransformer(user))
+}
+
 module.exports = {
-    userTransformer
+    userTransformer,
+    usersTransformer
 }

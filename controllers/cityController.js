@@ -16,6 +16,7 @@ const store = async (req, res, next) => {
     }
     const province = await getInstanceById(provinceId, 'Province')
     if (!province.success) {
+        res.status(province.status)
         result.success = false
         result.messages.push('Please enter a valid province id')
     }

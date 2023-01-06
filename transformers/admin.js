@@ -5,6 +5,11 @@ const adminTransformer = (admin) => {
     return admin
 }
 
+const adminsTransformer = (admins) => {
+    return admins.map((admin) => adminTransformer(admin))
+}
+
 module.exports = {
-    adminTransformer
+    adminTransformer,
+    adminsTransformer
 }
