@@ -2,6 +2,7 @@ const models = require("../models");
 const { getInstanceById } = require("../services/modelService");
 const { validateName } = require("../services/validationService");
 const { validationResult } = require('express-validator');
+const { categoryTransformer, categoriesTransformer } = require("../transformers/categoryTransformer");
 const store = async (req, res, next) => {
     const result = {
         success: true,
@@ -22,7 +23,7 @@ const store = async (req, res, next) => {
         icon: req?.file?.filename,
     });
     if (category) {
-        result.data = category;
+        result.data = categoryTransformer(category);
         result.messages.push("Category created successfully");
     } else {
         result.success = false;
@@ -37,7 +38,7 @@ const index = async (req, res, next) => {
         messages: [],
     };
     const categories = await models.Category.findAll();
-    result.data = categories;
+    result.data = categoriesTransformer(categories);
     return res.send(result);
 };
 const update = async (req, res, next) => {

@@ -30,27 +30,27 @@ const upload = multer({
     storage: storage,
     fileFilter: uploadFilter,
     limits: {
-        fileSize: 100
+        fileSize: 1_000_000
     }
 })
 
 router.post("/",
-    function (req, res, next) {
-        upload(req, res, function (err) {
-            if (err instanceof multer.MulterError) {
-                return res.send({
-                    success: false,
-                    messages: [err.message]
-                })
-            } else if (err) {
-                return res.send({
-                    success: false,
-                    messages: ['Unknown error occurred, please try later']
-                })
-            }
-        })
-        return next()
-    },
+    // function (req, res, next) {
+    //     upload(req, res, function (err) {
+    //         if (err instanceof multer.MulterError) {
+    //             return res.send({
+    //                 success: false,
+    //                 messages: [err.message]
+    //             })
+    //         } else if (err) {
+    //             return res.send({
+    //                 success: false,
+    //                 messages: ['Unknown error occurred, please try later']
+    //             })
+    //         }
+    //     })
+    //     return next()
+    // },
     upload.single('icon'), // req.file
     // function(req, res, next) {
     //     if ('file' in req) { // if (req.file)
