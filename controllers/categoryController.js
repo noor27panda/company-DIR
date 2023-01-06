@@ -10,12 +10,16 @@ const store = async (req, res, next) => {
     };
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        errors.array().forEach((error) => {
+            result.messages.push(`${error.param} - ${error.msg}`)
+        })
+        result.success = false
+        return res.send(result)
     }
     const category = await models.Category.create({
         name: req.body.name,
         description: req.body.description,
-        icon: req.body.icon,
+        icon: req?.file?.filename,
     });
     if (category) {
         result.data = category;
