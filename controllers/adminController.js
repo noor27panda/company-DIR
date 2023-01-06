@@ -1,6 +1,7 @@
 const models = require("../models");
 const { getInstanceById } = require("../services/modelService");
 const { hashPassword, verifyPassword } = require("../services/passwordService");
+const { getToken } = require("../services/tokenService");
 const {
   validateName,
   validateEmail,
@@ -60,6 +61,7 @@ const login = async (req, res, next) => {
     success: true,
     data: null,
     messages: [],
+    // token: null
   };
   const { email = "", password = "" } = req.body;
   if (!validateEmail(email)) {
@@ -84,7 +86,10 @@ const login = async (req, res, next) => {
     if (verifyPassword(password, admin.password)) {
       result.data = adminTransformer(admin);
       result.messages.push("Logged in successfully");
-      // send token - later
+      result.token = getToken({
+        id: admin.id,
+        type: 'admin'
+      })
     } else {
       result.success = false;
       result.messages.push("Invalid password!");

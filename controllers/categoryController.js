@@ -2,7 +2,7 @@ const models = require("../models");
 const { getInstanceById } = require("../services/modelService");
 const { validateName } = require("../services/validationService");
 const { validationResult } = require('express-validator');
-const { categoryTransformer, categoriesTransformer } = require("../transformers/categoryTransformer");
+const { categoryTransformer, categoriesTransformer } = require("../transformers/category");
 const store = async (req, res, next) => {
     const result = {
         success: true,

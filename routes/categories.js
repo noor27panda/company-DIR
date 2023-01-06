@@ -2,7 +2,8 @@ var express = require("express");
 const { store, index, update, destroy, show } = require("../controllers/categoryController");
 var router = express.Router();
 const { body, checkSchema } = require('express-validator');
-const multer = require('multer')
+const multer = require('multer');
+const isAdmin = require("../middlewares/isAdmin");
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads')
@@ -35,6 +36,7 @@ const upload = multer({
 })
 
 router.post("/",
+    isAdmin,
     // function (req, res, next) {
     //     upload(req, res, function (err) {
     //         if (err instanceof multer.MulterError) {
